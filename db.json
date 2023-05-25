@@ -1,0 +1,92 @@
+[
+  {
+    "model": "Honda City",
+    "year": 2015,
+    "listPrice": 20000,
+    "colors": ["Black", "White"],
+    "mileage": 10000,
+    "power": 150,
+    "maxSpeed": 200
+  },
+  {
+    "model": "Toyota Corolla",
+    "year": 2016,
+    "listPrice": 22000,
+    "colors": ["Red", "Blue"],
+    "mileage": 15000,
+    "power": 140,
+    "maxSpeed": 190
+  },
+  {
+    "model": "Ford Mustang",
+    "year": 2018,
+    "listPrice": 45000,
+    "colors": ["Yellow", "Black"],
+    "mileage": 5000,
+    "power": 450,
+    "maxSpeed": 250
+  },
+  {
+    "model": "Chevrolet Camaro",
+    "year": 2017,
+    "listPrice": 42000,
+    "colors": ["Blue", "Silver"],
+    "mileage": 8000,
+    "power": 400,
+    "maxSpeed": 240
+  },
+  {
+    "model": "Volkswagen Golf",
+    "year": 2019,
+    "listPrice": 25000,
+    "colors": ["White", "Gray"],
+    "mileage": 12000,
+    "power": 120,
+    "maxSpeed": 180
+  },
+  {
+    "model": "BMW 3 Series",
+    "year": 2016,
+    "listPrice": 35000,
+    "colors": ["Black", "Silver"],
+    "mileage": 15000,
+    "power": 180,
+    "maxSpeed": 220
+  },
+  {
+    "model": "Mercedes-Benz C-Class",
+    "year": 2017,
+    "listPrice": 40000,
+    "colors": ["Red", "White"],
+    "mileage": 10000,
+    "power": 200,
+    "maxSpeed": 230
+  },
+  {
+    "model": "Audi A4",
+    "year": 2016,
+    "listPrice": 38000,
+    "colors": ["Blue", "Black"],
+    "mileage": 14000,
+    "power": 190,
+    "maxSpeed": 220
+  },
+  {
+    "model": "Nissan Altima",
+    "year": 2016,
+    "listPrice": 18000,
+    "colors": ["Silver", "Black"],
+    "mileage": 20000,
+    "power": 150,
+    "maxSpeed": 200
+  },
+  {
+    "model": "Hyundai Sonata",
+    "year": 2017,
+    "listPrice": 19000,
+    "colors": ["Gray", "White"],
+    "mileage": 18000,
+    "power": 160,
+    "maxSpeed": 210
+  }
+]

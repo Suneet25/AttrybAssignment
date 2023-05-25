@@ -1,4 +1,4 @@
-const UserModel = require("../models/UsserModel");
+const UserModel = require("../models/UserModel");
 const JWT = require("jsonwebtoken");
 const { hashPassword, comparePassword } = require("../helper/UserHelper");
 let dotenv=require("dotenv");

@@ -3,6 +3,7 @@ let cors=require("cors");
 let connectDB=require("./config/db");
 const userRoutes = require("./routes/UserRoutes");
 let dotenv=require("dotenv");
+const OEM_SpecsRoutes = require("./routes/OEM_Specs_Routes");
 
 //config environmental
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors())
 
 //routes
  app.use("/api/user",userRoutes)
+ app.use("/api/OEM_Specs",OEM_SpecsRoutes)
 
 
 

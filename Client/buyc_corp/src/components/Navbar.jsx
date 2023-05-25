@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Button,
- 
   useDisclosure,
   Drawer,
   DrawerBody,
@@ -13,43 +12,43 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import buycars from "../Assets/BUYCARS.png"
+import buycars from "../Assets/BUYCARS.png";
 import React from "react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { GiTwoCoins } from "react-icons/gi";
-import { TbCoin } from "react-icons/tb";
-import { MdOutlineAccountBalanceWallet, MdVerifiedUser } from "react-icons/md";
-import { BiCar } from "react-icons/bi";
+
 import { RiLogoutBoxLine, RiLogoutBoxRLine } from "react-icons/ri";
+import { AiOutlineCar } from "react-icons/ai";
+import { GrAdd } from "react-icons/gr";
 
 import {
   FaUser,
-  FaRegCopy,
-  FaMapMarkerAlt,
-  FaPhone,
- 
   FaWindowClose,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-
-
-// import { AuthContext } from "../../Components/AuthContext";
-// import { useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
-// import "../../Styles/Navbar.css";
+import {useDispatch,useSelector} from "react-redux";
+import { logoutfun } from "../Redux/Auth/auth.action";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // const { name, isAuth, logoutUser } = useContext(AuthContext);
+//dispatch
+let dispatch=useDispatch();
 
-let name="Suneet";
-let isAuth=true
+//selector
+
+let {isAuth,loading,error,name}=useSelector(store=>store.authManager);
+
+//logout
+let logoutUser=()=>{
+  dispatch(logoutfun());
+}
+
   return (
     <>
       {isAuth ? (
-        <Box backgroundColor={"black"} color="white" px={4} >
+        <Box backgroundColor={"black"} color="white" px={4}>
           <Flex
             h={16}
             alignItems={"center"}
@@ -97,19 +96,42 @@ let isAuth=true
                       </Flex>
                     </DrawerHeader>
                     <DrawerBody>
-                  
-                     
-                     
+                      <Flex alignItems={"center"} gap="10px" height={"50px"}>
+                        <GrAdd size={"22"} />
+                        <RouterLink to="/">
+                          <Text
+                            fontSize="16px"
+                            cursor="pointer"
+
+                            // onClick={logoutUser}
+                          >
+                            Add Car
+                          </Text>
+                        </RouterLink>
+                      </Flex>
+                      <Flex alignItems={"center"} gap="10px" height={"50px"}>
+                        <AiOutlineCar size={"22"} />
+                        <RouterLink to="/">
+                          <Text
+                            fontSize="16px"
+                            cursor="pointer"
+
+                            // onClick={logoutUser}
+                          >
+                            Cars
+                          </Text>
+                        </RouterLink>
+                      </Flex>
+
                       <hr color="gray"></hr>
                       <Flex alignItems={"center"} gap="10px" height={"50px"}>
                         <RiLogoutBoxRLine size={"22"} />
                         <RouterLink to="/">
-                          {" "}
                           <Text
                             fontSize="16px"
                             cursor="pointer"
-                           
-                            // onClick={logoutUser}
+
+                            onClick={logoutUser}
                           >
                             Logout
                           </Text>
@@ -130,14 +152,13 @@ let isAuth=true
                 />
               </RouterLink>
             </Flex>
-           
+
             <Flex
               minWidth={{ lg: "320px", md: "320px", sm: "10px" }}
               alignItems="center"
               gap="20px"
               direction="row"
               width="auto"
-          
             >
               <Box>
                 <Text
@@ -201,7 +222,7 @@ let isAuth=true
                         md: "visible",
                         lg: "visible",
                       }}
-                      // onClick={logoutUser}
+                      onClick={logoutUser}
                     >
                       <b>Logout</b>
                     </Button>
@@ -209,7 +230,6 @@ let isAuth=true
                 </Text>
               </Box>
             </Flex>
-    
           </Flex>
         </Box>
       ) : (
@@ -238,20 +258,42 @@ let isAuth=true
                   size="sm"
                 >
                   <DrawerOverlay />
-                  <DrawerContent bg={"white"} color={"gray.700"}>
                   
+                  <DrawerContent bg={"white"} color={"gray.700"}>
+                  <DrawerHeader
+                      borderBottomWidth="1px"
+                      bg="black"
+                      color="white"
+                    >
+                      <Flex
+                        alignItems={"center"}
+                        justifyContent="space-between"
+                      >
+                        <Flex alignItems={"center"} gap="20px">
+                          <FaUser size={"25px"} />
+                          <Box>
+                            <Text fontSize="18px">{name}</Text>
+                          </Box>
+                        </Flex>
+                        <Box alignItems={"center"} onClick={onClose}>
+                          <FaWindowClose size={"28px"} />
+                        </Box>
+                      </Flex>
+                    </DrawerHeader>
                     <DrawerBody>
-                    
-                      
                       <hr color="gray"></hr>
                       <Flex alignItems={"center"} gap="10px" height={"50px"}>
+                        <AiOutlineCar size={"22"} />
+                        <RouterLink to="/">
+                          <Text fontSize="16px" cursor="pointer">
+                            Cars
+                          </Text>
+                        </RouterLink>
+                      </Flex>
+                      <Flex alignItems={"center"} gap="10px" height={"50px"}>
                         <RiLogoutBoxLine size={"22"} />
-                        <RouterLink to="/login">
-                          <Text
-                            fontSize="16px"
-                            cursor="pointer"
-                         
-                          >
+                        <RouterLink to="/signin">
+                          <Text fontSize="16px" cursor="pointer">
                             Login
                           </Text>
                         </RouterLink>
@@ -262,7 +304,7 @@ let isAuth=true
               </Box>
               <RouterLink to="/">
                 <Image
-                  className="zoomLogoNavbar"
+               
                   width={{ lg: "120px", md: "100px", sm: "50px" }}
                   height="60px"
                   src={buycars}
@@ -271,44 +313,20 @@ let isAuth=true
               </RouterLink>
             </Flex>
 
-      
-
             <Flex
               minWidth={{ lg: "320px", md: "320px", sm: "10px" }}
               alignItems="center"
               gap="20px"
               direction="row"
               width="auto"
-           
             >
-              <Box>
-                <Text
-                  fontSize={{ lg: "md", md: "md", sm: "sm" }}
-                  fontWeight={"600"}
-                  visibility={{ base: "hidden", lg: "visible" }}
-                >
-                  <RouterLink to="/host">
-                    <Button
-                      size={{ lg: "md", md: "md", sm: "xs" }}
-                      className="navbar_hostButton"
-                      style={{
-                        color: "black",
-                        backgroundColor: "white",
-                        borderRadius: "20px",
-                      }}
-                    >
-                      ADD CAR
-                    </Button>
-                  </RouterLink>
-                </Text>
-              </Box>
               <Box>
                 <Text
                   fontSize="sm"
                   fontWeight={"600"}
                   visibility={{ base: "hidden", lg: "visible" }}
                 >
-                  <Link to="/zms">CARS</Link>
+                  <Link to="/">CARS</Link>
                 </Text>
               </Box>
               <Box>
@@ -348,8 +366,6 @@ let isAuth=true
                 </Text>
               </Box>
             </Flex>
-
-         
           </Flex>
         </Box>
       )}
