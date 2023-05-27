@@ -4,19 +4,22 @@ import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import Home from "../pages/Home";
 import PrivateRoute from "./PrivateRoute";
-import CarDetailsPage from "../pages/Inventory_Related";
+
+import SingleCarPage from "../pages/SingleCarPage";
+import AddDetails from "../pages/Inventory_Related";
 const AllRoutes = () => {
   return (
     <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/single-car-page/:id" element={<SingleCarPage />}></Route>
       <Route
-        path="/"
+        path="/car-addDetails"
         element={
           <PrivateRoute>
-            <Home />
+            <AddDetails />
           </PrivateRoute>
         }
       ></Route>
-      <Route path="/car-details" element={<CarDetailsPage />}></Route>
       <Route path="/signin" element={<Signin />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
     </Routes>

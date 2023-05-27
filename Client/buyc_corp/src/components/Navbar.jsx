@@ -20,33 +20,32 @@ import { RiLogoutBoxLine, RiLogoutBoxRLine } from "react-icons/ri";
 import { AiOutlineCar } from "react-icons/ai";
 import { GrAdd } from "react-icons/gr";
 
-import {
-  FaUser,
-  FaWindowClose,
-} from "react-icons/fa";
+import { FaUser, FaWindowClose } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import { Link as RouterLink } from "react-router-dom";
-import {useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutfun } from "../Redux/Auth/auth.action";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-//dispatch
-let dispatch=useDispatch();
+  //dispatch
+  let dispatch = useDispatch();
 
-//selector
+  //selector
 
-let {isAuth,loading,error,name}=useSelector(store=>store.authManager);
+  let { isAuth, loading, error, name } = useSelector(
+    (store) => store.authManager
+  );
 
-//logout
-let logoutUser=()=>{
-  dispatch(logoutfun());
-}
+  //logout
+  let logoutUser = () => {
+    dispatch(logoutfun());
+  };
 
   return (
-    <>
+    <Box position={"sticky"} top={"0"} zIndex={"1"}>
       {isAuth ? (
         <Box backgroundColor={"black"} color="white" px={4}>
           <Flex
@@ -130,7 +129,6 @@ let logoutUser=()=>{
                           <Text
                             fontSize="16px"
                             cursor="pointer"
-
                             onClick={logoutUser}
                           >
                             Logout
@@ -166,7 +164,7 @@ let logoutUser=()=>{
                   fontWeight={"600"}
                   visibility={{ base: "hidden", lg: "visible" }}
                 >
-                  <RouterLink to="/host">
+                  <RouterLink to="/car-addDetails">
                     <Button
                       size={{ lg: "md", md: "md", sm: "xs" }}
                       className="navbar_hostButton"
@@ -258,9 +256,9 @@ let logoutUser=()=>{
                   size="sm"
                 >
                   <DrawerOverlay />
-                  
+
                   <DrawerContent bg={"white"} color={"gray.700"}>
-                  <DrawerHeader
+                    <DrawerHeader
                       borderBottomWidth="1px"
                       bg="black"
                       color="white"
@@ -283,6 +281,19 @@ let logoutUser=()=>{
                     <DrawerBody>
                       <hr color="gray"></hr>
                       <Flex alignItems={"center"} gap="10px" height={"50px"}>
+                        <GrAdd size={"22"} />
+                        <RouterLink to="/">
+                          <Text
+                            fontSize="16px"
+                            cursor="pointer"
+
+                            // onClick={logoutUser}
+                          >
+                            Add Car
+                          </Text>
+                        </RouterLink>
+                      </Flex>
+                      <Flex alignItems={"center"} gap="10px" height={"50px"}>
                         <AiOutlineCar size={"22"} />
                         <RouterLink to="/">
                           <Text fontSize="16px" cursor="pointer">
@@ -304,7 +315,6 @@ let logoutUser=()=>{
               </Box>
               <RouterLink to="/">
                 <Image
-               
                   width={{ lg: "120px", md: "100px", sm: "50px" }}
                   height="60px"
                   src={buycars}
@@ -327,6 +337,15 @@ let logoutUser=()=>{
                   visibility={{ base: "hidden", lg: "visible" }}
                 >
                   <Link to="/">CARS</Link>
+                </Text>
+              </Box>
+              <Box>
+                <Text
+                  fontSize="sm"
+                  fontWeight={"600"}
+                  visibility={{ base: "hidden", lg: "visible" }}
+                >
+                  <Link to="/car-addDetails">ADD CAR</Link>
                 </Text>
               </Box>
               <Box>
@@ -369,7 +388,7 @@ let logoutUser=()=>{
           </Flex>
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

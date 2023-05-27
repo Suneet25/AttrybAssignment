@@ -1,8 +1,10 @@
 import { applyMiddleware,combineReducers,legacy_createStore } from "redux";
 import thunk from "redux-thunk";
 import { authReducer } from "./Auth/auth.reducer";
+import { carsReducer } from "./Cars/cars.reducer";
 let rootReducer=combineReducers({
-    authManager:authReducer
+    authManager:authReducer,
+    carsManager:carsReducer
 })
 
 

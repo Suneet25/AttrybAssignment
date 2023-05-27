@@ -4,9 +4,23 @@ let connectDB=require("./config/db");
 const userRoutes = require("./routes/UserRoutes");
 let dotenv=require("dotenv");
 const OEM_SpecsRoutes = require("./routes/OEM_Specs_Routes");
+const MarketPlace_inventory_Routes = require("./routes/MarketPlace_Inventory_Routes");
+let cloudinary=require("cloudinary");
+
 
 //config environmental
 dotenv.config();
+
+//cloudinaryConfigs
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+
+
+
 
 let app=express();
 
@@ -18,6 +32,7 @@ app.use(cors())
 //routes
  app.use("/api/user",userRoutes)
  app.use("/api/OEM_Specs",OEM_SpecsRoutes)
+ app.use("/api/marketPlace_Inventory",MarketPlace_inventory_Routes);
 
 
 

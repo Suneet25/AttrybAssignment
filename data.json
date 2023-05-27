@@ -1,0 +1,92 @@
+[
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 50000,
+    "majorScratches": true,
+    "originalPaint": false,
+    "accidentsReported": 2,
+    "previousBuyers": 1,
+    "registrationPlace": "New York"
+  },
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 60000,
+    "majorScratches": false,
+    "originalPaint": true,
+    "accidentsReported": 0,
+    "previousBuyers": 2,
+    "registrationPlace": "Los Angeles"
+  },
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 45000,
+    "majorScratches": true,
+    "originalPaint": true,
+    "accidentsReported": 1,
+    "previousBuyers": 0,
+    "registrationPlace": "Chicago"
+  },
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 55000,
+    "majorScratches": false,
+    "originalPaint": true,
+    "accidentsReported": 0,
+    "previousBuyers": 1,
+    "registrationPlace": "San Francisco"
+  },
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 70000,
+    "majorScratches": true,
+    "originalPaint": false,
+    "accidentsReported": 3,
+    "previousBuyers": 2,
+    "registrationPlace": "Miami"
+  },
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 60000,
+    "majorScratches": false,
+    "originalPaint": true,
+    "accidentsReported": 1,
+    "previousBuyers": 0,
+    "registrationPlace": "Seattle"
+  },
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 40000,
+    "majorScratches": true,
+    "originalPaint": false,
+    "accidentsReported": 2,
+    "previousBuyers": 1,
+    "registrationPlace": "Dallas"
+  },
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 80000,
+    "majorScratches": true,
+    "originalPaint": true,
+    "accidentsReported": 1,
+    "previousBuyers": 3,
+    "registrationPlace": "Boston"
+  },
+  {
+    "user": "60a5d067c36c3f2ed01c70a1",
+    "oemSpecs": "60a5d0e6c36c3f2ed01c70a2",
+    "kmOnOdometer": 65000,
+    "majorScratches": false,
+    "originalPaint": true,
+    "accidentsReported": 0,
+    "previousBuyers": 2,
+    "registrationPlace": "Houston"
+  }
+]

@@ -1,17 +1,19 @@
-// import JWT from "jsonwebtoken";
-// import dotenv from "dotenv";
-// import UserModel from "../models/usersModel.js";
 
+let dotenv=require("dotenv");
+let JWT=require("jsonwebtoken");
 dotenv.config();
 
 //Protected route tokenbase
-export let requireSignin = async (req, res, next) => {
+ let requireSignin = async (req, res, next) => {
   try {
     let token = req.headers.authorization;
-    let decode = JWT.verify(token, process.env.JWT_SECRET_KEY);
-    req.user = decode;
+    let decode =await JWT.verify(token, process.env.JWT_SECRET_KEY);
+
+    console.log(decode);
+    req.userid = decode._id;
     next();
   } catch (error) {
     console.log(error);
   }
 };
+module.exports=requireSignin;
