@@ -10,7 +10,7 @@ export let registerfun=(data)=>async(dispatch)=>{
  
     dispatch({type:AUTH_REGISTER_LOADING});
     try {
-        let res=await axios.post(`http://localhost:8000/api/user/register`,{name:data.name,email:data.email,password:data.password});
+        let res=await axios.post(`https://drawers-armadillo.cyclic.app/api/user/register`,{name:data.name,email:data.email,password:data.password});
         console.log(res.data);
         if(res.data.success)
         {
@@ -34,7 +34,7 @@ export let loginfun=(data)=>async(dispatch)=>{
  
     dispatch({type:AUTH_LOADING});
     try {
-        let res=await axios.post(`http://localhost:8000/api/user/login`,{email:data.email,password:data.password});
+        let res=await axios.post(`https://drawers-armadillo.cyclic.app/api/user/login`,{email:data.email,password:data.password});
         console.log(res.data);
     dispatch({type:AUTH_SUCCESS,payload:res.data});
 

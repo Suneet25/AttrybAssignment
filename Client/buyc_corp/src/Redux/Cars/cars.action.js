@@ -22,7 +22,7 @@ export let getCars = () => async (dispatch) => {
   dispatch({ type: GET_CARS_LOADING });
   try {
     let res = await axios.get(
-      "http://localhost:8000/api/marketPlace_Inventory/get-inventoryInfo"
+      "https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/get-inventoryInfo"
     );
 
     dispatch({ type: GET_CARS_SUCCESS, payload: res.data.allInventoryData });
@@ -37,7 +37,7 @@ export let getSingleCar = (id) => async (dispatch) => {
   dispatch({ type: GET_SINGLE_CARS_LOADING });
   try {
     let res = await axios.get(
-      `http://localhost:8000/api/marketPlace_Inventory/get-SingleinventoryInfo/${id}`
+      `https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/get-SingleinventoryInfo/${id}`
     );
 
     await dispatch({ type: GET_SINGLE_CARS_SUCCESS, payload: res.data.singleInventoryData });
