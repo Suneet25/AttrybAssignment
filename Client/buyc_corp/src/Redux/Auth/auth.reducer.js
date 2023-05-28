@@ -8,12 +8,14 @@ import {
   AUTH_LOGOUT
 } from "./auth.actionTypes";
 
+let token=JSON.parse(localStorage.getItem("token"));
+
 let initState = {
   loading: false,
   error: false,
-  isAuth: false,
-  token: "",
-  name: "",
+  isAuth: token ? true : false,
+  token: token || null,
+  name: token ? token.user.name : null,
 };
 
 export let authReducer = (state = initState, { type, payload }) => {
@@ -60,7 +62,7 @@ export let authReducer = (state = initState, { type, payload }) => {
     }
     case AUTH_LOGOUT: {
       localStorage.removeItem("token");
-      return { ...state, isAuth: false, token: "", name: "" };
+      return { ...state, isAuth: false, token: null, name: "" };
     }
     default: {
       return state;

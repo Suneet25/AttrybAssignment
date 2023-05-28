@@ -22,10 +22,10 @@ export let getCars = () => async (dispatch) => {
   dispatch({ type: GET_CARS_LOADING });
   try {
     let res = await axios.get(
-      "https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/get-inventoryInfo"
+      "http://localhost:8000/api/marketPlace_Inventory/get-inventoryInfo"
     );
 
-    dispatch({ type: GET_CARS_SUCCESS, payload: res.data.allInventoryData });
+    dispatch({ type: GET_CARS_SUCCESS, payload: res.data.flteredData });
   } catch (error) {
     console.log(error);
     dispatch({ type: GET_CARS_ERROR });
@@ -37,12 +37,31 @@ export let getSingleCar = (id) => async (dispatch) => {
   dispatch({ type: GET_SINGLE_CARS_LOADING });
   try {
     let res = await axios.get(
-      `https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/get-SingleinventoryInfo/${id}`
+      `http://localhost:8000/api/marketPlace_Inventory/get-SingleinventoryInfo/${id}`
     );
 
-    await dispatch({ type: GET_SINGLE_CARS_SUCCESS, payload: res.data.singleInventoryData });
+    await dispatch({
+      type: GET_SINGLE_CARS_SUCCESS,
+      payload: res.data.singleInventoryData,
+    });
   } catch (error) {
     console.log(error);
     dispatch({ type: GET_SINGLE_CARS_ERROR });
+  }
+};
+
+//addCar
+export let addCar = (data) => async (dispatch) => {
+  dispatch({ type: ADD_CARS_LOADING });
+  try {
+    let res = await axios.post(
+      `https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/get-SingleinventoryInfo/`,
+      data
+    );
+
+    await dispatch({ type: ADD_CARS_SUCCESS, payload: res });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: ADD_CARS_ERROR });
   }
 };

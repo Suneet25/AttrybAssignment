@@ -1,5 +1,8 @@
 let mongoose = require("mongoose");
 
+//this is the inventory model Schema which states that all the keys of inventory document will not more than
+//thsese given keys and of specific types mentioned also
+
 let marketPlaceTnventoryModel = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -11,31 +14,33 @@ let marketPlaceTnventoryModel = new mongoose.Schema({
     ref: "OEM_Spec",
     required: true,
   },
-  image: [
-    {
-      url: { type: String },
-    },
-  ],
-  title: { type: String },
-  description: { type: String },
+  image: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
 
   kmOnOdometer: {
     type: Number,
+    required: true,
   },
   majorScratches: {
-    type: Boolean,
+    type: String,
+    required: true,
   },
   originalPaint: {
-    type: Boolean,
+    type: String,
+    required: true,
   },
   accidentsReported: {
     type: Number,
+    required: true,
   },
   previousBuyers: {
     type: Number,
+    required: true,
   },
   registrationPlace: {
     type: String,
+    required: true,
   },
   createdAt: {
     type: Date,

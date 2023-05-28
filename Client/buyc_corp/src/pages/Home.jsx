@@ -10,17 +10,50 @@ import {
   Image,
   Radio,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { getCars } from "../Redux/Cars/cars.action";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const Home = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
+  let toast=useToast();
   let { loading, error, carsData } = useSelector((store) => store.carsManager);
+  let {token}=useSelector(store=>store.authManager);
+  
+
+  //remove cars
+  let handleDelete=async(id)=>{
+    
+
+    await axios.delete(`http://localhost:8000/api/marketPlace_Inventory/remove-inventoryInfo/${id}`,  {
+  headers: {
+    'Authorization': ` ${token.token}`
+  }
+})
+  .then(response => {
+    // Handle the response
+    console.log(response.data);
+dispatch(getCars());
+    toast({
+      title: `Car removed successfully`,
+      status: "success",
+      isClosable: true,
+    })
+  })
+  .catch(error => {
+    // Handle the error
+    console.error(error);
+  });
+  }
   useEffect(() => {
     dispatch(getCars());
   }, [dispatch]);
   console.log(carsData);
+
+
+
   return (
     <>
       <Grid
@@ -107,7 +140,7 @@ const Home = () => {
                   transition="box-shadow 0.2s"
                   _hover={{ boxShadow: "lg" }}
                 >
-                  <Image src={el.image[0].url} />
+                  <Image src={el.image} />
                 </Box>
 
                 <Heading fontSize={"sm"} mt={3}>
@@ -132,19 +165,7 @@ const Home = () => {
                     backgroundColor={"gray.600"}
                     color={"white"}
                     _hover={{ backgroundColor: "gray.700", color: "white" }}
-                    // onClick={() => {
-                    //   setCart([...cart, el]);
-                    //   localStorage.setItem(
-                    //     "cart",
-                    //     JSON.stringify([...cart, el])
-                    //   );
-                    //   toast({
-                    //     title: "Item is added to cart",
-                    //     status: "success",
-                    //     isClosable: true,
-                    //     position: "top-right",
-                    //   });
-                    // }}
+             onClick={()=>handleDelete(el._id)}
                   >
                     Delete
                   </Button>

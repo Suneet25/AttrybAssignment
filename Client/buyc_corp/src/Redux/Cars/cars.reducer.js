@@ -19,6 +19,7 @@ import {
 let initData = {
   loading: false,
   error: false,
+  token:null,
   carsData: [],
   singleCarData: {},
 };
@@ -33,6 +34,7 @@ export let carsReducer = (state = initData, { type, payload }) => {
       };
     }
     case GET_CARS_SUCCESS: {
+  
       return {
         ...state,
         loading: false,
@@ -63,6 +65,7 @@ export let carsReducer = (state = initData, { type, payload }) => {
       };
     }
     case GET_SINGLE_CARS_SUCCESS: {
+    
       return {
         ...state,
         loading: false,
