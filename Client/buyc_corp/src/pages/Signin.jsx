@@ -11,6 +11,7 @@ import {
   Link,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import Logo from "../Assets/SignUp_Login_Logo.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 const Signin = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  let toast=useToast();
   //navigate
   let navigate = useNavigate();
   //dispatch
@@ -36,6 +38,11 @@ const Signin = () => {
     dispatch(loginfun(data));
   };
   if (isAuth) {
+    toast({
+      title: `Login successfull`,
+      status: "success",
+      isClosable: true,
+    })
     navigate("/");
   }
   return (

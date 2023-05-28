@@ -11,17 +11,20 @@ import {
   Link,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "../Assets/SignUp_Login_Logo.png";
 import { registerfun } from "../Redux/Auth/auth.action";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-
+let toast=useToast();
+let navigate=useNavigate();
   //dispatch
   let dispatch = useDispatch();
   //selector
@@ -31,6 +34,12 @@ const Signup = () => {
   let handleSignup = () => {
     let data = { name, email, password };
     dispatch(registerfun(data));
+    navigate("/signin")
+    toast({
+      title: `Registration successfull`,
+      status: "success",
+      isClosable: true,
+    })
   };
 
   return (

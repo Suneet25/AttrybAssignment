@@ -10,6 +10,7 @@ import {
   DrawerContent,
   Image,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 
 import buycars from "../Assets/BUYCARS.png";
@@ -29,7 +30,7 @@ import { logoutfun } from "../Redux/Auth/auth.action";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  let toast=useToast();
   //dispatch
   let dispatch = useDispatch();
 
@@ -42,6 +43,12 @@ const Navbar = () => {
   //logout
   let logoutUser = () => {
     dispatch(logoutfun());
+
+    toast({
+      title: `Loggedout successfull`,
+      status: "success",
+      isClosable: true,
+    })
   };
 
   return (

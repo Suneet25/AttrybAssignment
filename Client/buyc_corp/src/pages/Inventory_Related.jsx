@@ -214,13 +214,7 @@ await axios.post(`http://localhost:8000/api/marketPlace_Inventory/add-inventoryI
         </InputRightElement>
       </InputGroup>
         
-        {/* <Input
-          border={"1px solid gray"}
-          type="text"
-          placeholder="Select OEM specs"
-          value={OEM}
-          onChange={(e) => setOEM(e.target.value)}
-        /> */}
+       
         <Input
           border={"1px solid gray"}
           type="text"
