@@ -32,6 +32,15 @@ let navigate=useNavigate();
 
   //signup
   let handleSignup = () => {
+    if(!name || !email || !password)
+    {
+      toast({
+        title: `Email and password required`,
+        status: "error",
+        isClosable: true,
+      })
+      return;
+    }
     let data = { name, email, password };
     dispatch(registerfun(data));
     navigate("/signin")

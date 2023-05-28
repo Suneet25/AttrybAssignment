@@ -9,13 +9,13 @@ import {
 } from "./auth.actionTypes";
 
 let token=JSON.parse(localStorage.getItem("token"));
-console.log(token);
+
 let initState = {
   loading: false,
   error: false,
   isAuth: token ? true : false,
   token: token || null,
-  name: token ? token.user.name : null,
+  name: token ? token?.user?.name : null,
 };
 
 export let authReducer = (state = initState, { type, payload }) => {

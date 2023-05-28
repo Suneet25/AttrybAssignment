@@ -1,5 +1,6 @@
 let MarketPlaceInventoryModel = require("../models/MarketPlace_Inventory_Model");
 let cloudinary = require("cloudinary");
+const OEM_SpecsModel = require("../models/OEM_Specs_Model");
 
 let addInformationController = async (req, res) => {
   try {
@@ -36,61 +37,87 @@ let addInformationController = async (req, res) => {
 
 let getInformationController = async (req, res) => {
   let { order, filter } = req.query;
-  console.log(filter,order);
+  console.log(filter, order);
+  
   try {
     //filter by price
     if (filter === "price") {
       let flteredData;
       //filter by price in desc order
       if (order === "desc") {
-        flteredData = await MarketPlaceInventoryModel.find({})
-          .populate("oemSpecs")
-          .sort({ listPrice: -1 });
-          console.log(flteredData);
+        flteredData = await MarketPlaceInventoryModel.aggregate([
+          {
+            $lookup: {
+              from: "oem_specs", // Replace 'oem_specs' with the actual collection name of the OEM_Spec model
+              localField: "oemSpecs",
+              foreignField: "_id",
+              as: "oemSpecs",
+            },
+          },
+          { $unwind: "$oemSpecs" },
+          { $sort: { "oemSpecs.listPrice": -1 } }, // Sort by listPrice in descending order
+        ]);
+        console.log(flteredData);
+        res.status(200).send({
+          success: true,
+          message: "Successfully inventoryData fetched",
+          flteredData,
+        });
       } else {
         //filter by price in asc order
-        flteredData = await MarketPlaceInventoryModel.find({})
-          .populate("user")
-          .populate("oemSpecs")
-          .sort({ price: 1 });
-      }
-      
-      res.status(200).send({
-        success: true,
-        message: "Successfully inventoryData fetched",
-        flteredData,
-      });
-    } else if (filter === "mileage") {
-      let flteredData;
-      //filter by mileage in desc order
-      if (order === "desc") {
-        flteredData = await MarketPlaceInventoryModel.find({})
-        
-          .populate("oemSpecs")
-          .sort((a, b) => b.oemSpecs.mileage - a.oemSpecs.mileage);
-      } else {
-        //filter by mileage in asc order
+        flteredData = await MarketPlaceInventoryModel.aggregate([
+          {
+            $lookup: {
+              from: "oem_specs", // Replace 'oem_specs' with the actual collection name of the OEM_Spec model
+              localField: "oemSpecs",
+              foreignField: "_id",
+              as: "oemSpecs",
+            },
+          },
+          { $unwind: "$oemSpecs" },
+          { $sort: { "oemSpecs.listPrice": 1 } }, // Sort by listPrice in ascending order
+        ]);
 
-        flteredData = await MarketPlaceInventoryModel.find({})
-          .populate("user")
-          .populate("oemSpecs")
-          .sort((a, b) => a.oemSpecs.mileage - b.oemSpecs.mileage);
+        res.status(200).send({
+          success: true,
+          message: "Successfully inventoryData fetched",
+          flteredData,
+        });
       }
+    }else if (filter === "mileage") {
+      let flteredData;
+      // filter by mileage
+      if (order === "desc") {
+        flteredData = await MarketPlaceInventoryModel.aggregate([
+          {
+            $lookup: {
+              from: "oem_specs", // Replace 'oem_specs' with the actual collection name of the OEM_Spec model
+              localField: "oemSpecs",
+              foreignField: "_id",
+              as: "oemSpecs",
+            },
+          },
+          { $unwind: "$oemSpecs" },
+          { $sort: { "oemSpecs.mileage": -1 } }, // Sort by mileage in descending order
+        ]);
+      } else {
+        flteredData = await MarketPlaceInventoryModel.aggregate([
+          {
+            $lookup: {
+              from: "oem_specs", // Replace 'oem_specs' with the actual collection name of the OEM_Spec model
+              localField: "oemSpecs",
+              foreignField: "_id",
+              as: "oemSpecs",
+            },
+          },
+          { $unwind: "$oemSpecs" },
+          { $sort: { "oemSpecs.mileage": 1 } }, // Sort by mileage in ascending order
+        ]);
+      }
+    
       res.status(200).send({
         success: true,
-        message: "Successfully inventoryData fetched",
-        flteredData,
-      });
-    } else if (filter === "colors") {
-      //filter by color
-      let flteredData = await MarketPlaceInventoryModel.find({}).populate({
-        path: "oemSpecs",
-        match: { colors: { $regex: order, $option: "i" } },
-      });
-      flteredData = flteredData.filter((el) => el.oemSpecs !== null);
-      res.status(200).send({
-        success: true,
-        message: "Successfully inventoryData fetched",
+        message: "Successfully fetched inventoryData",
         flteredData,
       });
     } else {

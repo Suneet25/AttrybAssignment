@@ -18,13 +18,13 @@ import {
 
 import axios from "axios";
 //getAllCars
-export let getCars = () => async (dispatch) => {
+export let getCars = (filter,order) => async (dispatch) => {
   dispatch({ type: GET_CARS_LOADING });
   try {
     let res = await axios.get(
-      "https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/get-inventoryInfo"
+      `http://localhost:8000/api/marketPlace_Inventory/get-inventoryInfo?filter=${filter}&order=${order}`
     );
-
+console.log(res.data.flteredData);
     dispatch({ type: GET_CARS_SUCCESS, payload: res.data.flteredData });
   } catch (error) {
     console.log(error);

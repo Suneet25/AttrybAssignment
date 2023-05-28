@@ -33,6 +33,15 @@ const Signin = () => {
   let load = false;
 
   let handleSignin = () => {
+    if(!email || !password)
+    {
+      toast({
+        title: `Email and password required`,
+        status: "error",
+        isClosable: true,
+      })
+      return;
+    }
     console.log(email, password);
     let data = { email, password };
     dispatch(loginfun(data));
