@@ -60,7 +60,7 @@ let elem=useRef(null);
   let handleDelete=async(id)=>{
     
 
-    await axios.delete(`http://localhost:8000/api/marketPlace_Inventory/remove-inventoryInfo/${id}`,  {
+    await axios.delete(`https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/remove-inventoryInfo/${id}`,  {
   headers: {
     'Authorization': ` ${token.token}`
   }
@@ -92,7 +92,7 @@ let handleFocus=()=>{
 
   let handleSearch = async () => {
     let res = await axios.get(
-      `http://localhost:8000/api/OEM_Specs/get-OEM_Specs?search=${inputData}`
+      `https://drawers-armadillo.cyclic.app/api/OEM_Specs/get-OEM_Specs?search=${inputData}`
     );
     setSearch(res.data.specs);
   };
@@ -125,7 +125,7 @@ const handleEditCar =async () => {
   );
 
   
-await axios.patch(`http://localhost:8000/api/marketPlace_Inventory/remove-inventoryInfo/${editId}`, {
+await axios.patch(`https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/remove-inventoryInfo/${editId}`, {
   oemSpecs,
   image,
   title,

@@ -17,19 +17,6 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-// {
-//   "image":"https://ymimg1.b8cdn.com/resized/car_model/2699/pictures/2892799/webp_listing_main_01.webp",
-
-//   "oemSpecs": "64724f252680c9ba99e164b3",
-//   "title":"Honda City",
-//   "description":"Car is fully mdified",
-//   "kmOnOdometer": 55000,
-//   "majorScratches": "1",
-//   "originalPaint": "blue",
-//   "accidentsReported": 0,
-//   "previousBuyers": 1,
-//   "registrationPlace": "San Francisco"
-// }
 
 const AddDetails = () => {
   const [image, setImage] = useState("");
@@ -55,7 +42,7 @@ let handleFocus=()=>{
 
   let handleSearch = async () => {
     let res = await axios.get(
-      `http://localhost:8000/api/OEM_Specs/get-OEM_Specs?search=${inputData}`
+      `https://drawers-armadillo.cyclic.app/api/OEM_Specs/get-OEM_Specs?search=${inputData}`
     );
     setSearch(res.data.specs);
   };
@@ -82,7 +69,7 @@ const handleAddCar =async () => {
   );
 
   
-await axios.post(`http://localhost:8000/api/marketPlace_Inventory/add-inventoryInfo`, {
+await axios.post(`https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/add-inventoryInfo`, {
   oemSpecs,
   image,
   title,
