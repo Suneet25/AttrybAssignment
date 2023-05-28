@@ -144,7 +144,7 @@ await axios.patch(`https://drawers-armadillo.cyclic.app/api/marketPlace_Inventor
   .then(response => {
     // Handle the response
     console.log(response.data);
-
+    dispatch(getCars());
     toast({
       title: `Car updated successfully`,
       status: "success",

@@ -9,7 +9,7 @@ import {
 } from "./auth.actionTypes";
 
 let token=JSON.parse(localStorage.getItem("token"));
-
+console.log(token);
 let initState = {
   loading: false,
   error: false,

@@ -31,10 +31,10 @@ const AddDetails = () => {
   const [registrationPlace, setRegistrationPlace] = useState("");
   const [search, setSearch] = useState([]);
   const [inputData, setInputData] = useState("");
+  let toast=useToast();
   let elem = useRef(null);
  
 let {token}=useSelector(store=>store.authManager);
-let toast=useToast();
 console.log(token.token);
 let handleFocus=()=>{
   elem.current.focus()
@@ -68,37 +68,39 @@ const handleAddCar =async () => {
     registrationPlace
   );
 
-  
-await axios.post(`https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/add-inventoryInfo`, {
-  oemSpecs,
-  image,
-  title,
-  description,
-  kmOnOdometer,
-  majorScratches,
-  originalPaint,
-  accidentsReported,
-  previousBuyers,
-  registrationPlace
-}, {
-  headers: {
-    'Authorization': ` ${token.token}`
-  }
-})
-  .then(response => {
-    // Handle the response
-    console.log(response.data);
 
-    toast({
-      title: `Car added successfully`,
-      status: "success",
-      isClosable: true,
-    })
+  await axios.post(`https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/add-inventoryInfo`, {
+    oemSpecs,
+    image,
+    title,
+    description,
+    kmOnOdometer,
+    majorScratches,
+    originalPaint,
+    accidentsReported,
+    previousBuyers,
+    registrationPlace
+  }, {
+    headers: {
+      'Authorization':  token && token.token ? ` ${token.token}` : undefined
+    }
   })
-  .catch(error => {
-    // Handle the error
-    console.error(error);
-  });
+    .then(response => {
+      // Handle the response
+      console.log(response.data);
+  
+      toast({
+        title: `Car added successfully`,
+        status: "success",
+        isClosable: true,
+      })
+    })
+    .catch(error => {
+      // Handle the error
+      console.error(error);
+    });
+  
+
 
 
 };
