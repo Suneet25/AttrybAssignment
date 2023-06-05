@@ -38,7 +38,7 @@ let addInformationController = async (req, res) => {
 let getInformationController = async (req, res) => {
   let { order, filter } = req.query;
   console.log(filter, order);
-  
+
   try {
     //filter by price
     if (filter === "price") {
@@ -48,7 +48,7 @@ let getInformationController = async (req, res) => {
         flteredData = await MarketPlaceInventoryModel.aggregate([
           {
             $lookup: {
-              from: "oem_specs", // Replace 'oem_specs' with the actual collection name of the OEM_Spec model
+              from: "oem_specs",
               localField: "oemSpecs",
               foreignField: "_id",
               as: "oemSpecs",
@@ -84,7 +84,7 @@ let getInformationController = async (req, res) => {
           flteredData,
         });
       }
-    }else if (filter === "mileage") {
+    } else if (filter === "mileage") {
       let flteredData;
       // filter by mileage
       if (order === "desc") {
@@ -114,12 +114,32 @@ let getInformationController = async (req, res) => {
           { $sort: { "oemSpecs.mileage": 1 } }, // Sort by mileage in ascending order
         ]);
       }
-    
+
       res.status(200).send({
         success: true,
         message: "Successfully fetched inventoryData",
         flteredData,
       });
+    } else if (filter === "colors") {
+      //this is used for colors filter as we have populated oemSpecs and mathing the colors with regex query
+      //having opitons i which enable case sensitive searching
+
+      try {
+        const regex = new RegExp(order, "i");
+        
+        const deals = await MarketPlaceInventoryModel.find({})
+          .populate({
+            path: "oemSpecs",
+            match: { colors: regex }
+          })
+          .exec();  //It wii give me all the oemspecs
+
+        const filteredDeals = deals.filter((deal) => deal.oemSpecs !== null && deal.oemSpecs.colors.length);
+    console.log("filteredDeals",filteredDeals);
+        res.status(200).send({ flteredData: filteredDeals });
+      } catch (error) {
+        res.status(500).send({ error: "Internal server error" });
+      }  //this will filter the data and return
     } else {
       let flteredData = await MarketPlaceInventoryModel.find({})
         .populate({ path: "oemSpecs" })

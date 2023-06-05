@@ -23,8 +23,8 @@ const Signup = () => {
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-let toast=useToast();
-let navigate=useNavigate();
+  let toast = useToast();
+  let navigate = useNavigate();
   //dispatch
   let dispatch = useDispatch();
   //selector
@@ -32,23 +32,22 @@ let navigate=useNavigate();
 
   //signup
   let handleSignup = () => {
-    if(!name || !email || !password)
-    {
+    if (!name || !email || !password) {
       toast({
         title: `Email and password required`,
         status: "error",
         isClosable: true,
-      })
+      });
       return;
     }
     let data = { name, email, password };
     dispatch(registerfun(data));
-    navigate("/signin")
+    navigate("/signin");
     toast({
       title: `Registration successfull`,
       status: "success",
       isClosable: true,
-    })
+    });
   };
 
   return (
@@ -144,8 +143,8 @@ let navigate=useNavigate();
               </Stack>
               <Stack>
                 <Text align={"center"} fontSize={"sm"}>
-                  Already a user?{" "}
-                  <Link color={"green"} to="/signup">
+                  Already a user?
+                  <Link color={"green"} href="/signin">
                     Login
                   </Link>
                 </Text>

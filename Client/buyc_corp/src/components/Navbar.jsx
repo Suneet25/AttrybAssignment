@@ -22,7 +22,7 @@ import { AiOutlineCar } from "react-icons/ai";
 import { GrAdd } from "react-icons/gr";
 
 import { FaUser, FaWindowClose } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Link as RouterLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,10 +30,10 @@ import { logoutfun } from "../Redux/Auth/auth.action";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  let toast=useToast();
+  let toast = useToast();
   //dispatch
   let dispatch = useDispatch();
-
+  let navigate = useNavigate();
   //selector
 
   let { isAuth, loading, error, name } = useSelector(
@@ -48,7 +48,7 @@ const Navbar = () => {
       title: `Loggedout successfull`,
       status: "success",
       isClosable: true,
-    })
+    });
   };
 
   return (
@@ -104,13 +104,8 @@ const Navbar = () => {
                     <DrawerBody>
                       <Flex alignItems={"center"} gap="10px" height={"50px"}>
                         <GrAdd size={"22"} />
-                        <RouterLink to="/">
-                          <Text
-                            fontSize="16px"
-                            cursor="pointer"
-
-                            // onClick={logoutUser}
-                          >
+                        <RouterLink to="/car-addDetails">
+                          <Text fontSize="16px" cursor="pointer">
                             Add Car
                           </Text>
                         </RouterLink>
@@ -118,12 +113,7 @@ const Navbar = () => {
                       <Flex alignItems={"center"} gap="10px" height={"50px"}>
                         <AiOutlineCar size={"22"} />
                         <RouterLink to="/">
-                          <Text
-                            fontSize="16px"
-                            cursor="pointer"
-
-                            // onClick={logoutUser}
-                          >
+                          <Text fontSize="16px" cursor="pointer">
                             Cars
                           </Text>
                         </RouterLink>
@@ -192,7 +182,7 @@ const Navbar = () => {
                   fontWeight={"600"}
                   visibility={{ base: "hidden", lg: "visible" }}
                 >
-                  <Link to="/zms">CARS</Link>
+                  <Link to="/">CARS</Link>
                 </Text>
               </Box>
               <Box>
@@ -274,7 +264,7 @@ const Navbar = () => {
                         alignItems={"center"}
                         justifyContent="space-between"
                       >
-                        <Flex alignItems={"center"} gap="20px">
+                        <Flex alignItems={"center"} gap="20px" >
                           <FaUser size={"25px"} />
                           <Box>
                             <Text fontSize="18px">{name}</Text>
@@ -289,13 +279,8 @@ const Navbar = () => {
                       <hr color="gray"></hr>
                       <Flex alignItems={"center"} gap="10px" height={"50px"}>
                         <GrAdd size={"22"} />
-                        <RouterLink to="/">
-                          <Text
-                            fontSize="16px"
-                            cursor="pointer"
-
-                            // onClick={logoutUser}
-                          >
+                        <RouterLink to="/car-addDetails">
+                          <Text fontSize="16px" cursor="pointer">
                             Add Car
                           </Text>
                         </RouterLink>

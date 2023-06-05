@@ -40,7 +40,7 @@ export let loginfun=(data)=>async(dispatch)=>{
 
 
 }catch (error) {
-        console.log(error);
+        console.log("",error);
         dispatch({type:AUTH_ERROR})
     }
 }

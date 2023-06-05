@@ -8,14 +8,16 @@ import {
   AUTH_LOGOUT
 } from "./auth.actionTypes";
 
-let token=JSON.parse(localStorage.getItem("token"));
+let token=JSON.parse(localStorage.getItem("token")) ;
+let userName=JSON.parse(localStorage.getItem("userName")) ;
 
 let initState = {
   loading: false,
   error: false,
   isAuth: token ? true : false,
   token: token || null,
-  name: token ? token?.user?.name : null,
+  name: userName ? userName: null,
+
 };
 
 export let authReducer = (state = initState, { type, payload }) => {
@@ -50,7 +52,8 @@ export let authReducer = (state = initState, { type, payload }) => {
       return { ...state, loading: true ,erroe:false};
     }
     case AUTH_SUCCESS: {
-      localStorage.setItem("token", JSON.stringify(payload));
+      localStorage.setItem("token", JSON.stringify(payload.token));
+      localStorage.setItem("userName", JSON.stringify(payload.user.name));
       return {
         ...state,
         token: payload.token,
@@ -62,6 +65,7 @@ export let authReducer = (state = initState, { type, payload }) => {
     }
     case AUTH_LOGOUT: {
       localStorage.removeItem("token");
+      localStorage.removeItem("userName");
       return { ...state, isAuth: false, token: null, name: "" };
     }
     default: {

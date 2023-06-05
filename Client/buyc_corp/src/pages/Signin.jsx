@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 const Signin = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let toast=useToast();
+  let toast = useToast();
   //navigate
   let navigate = useNavigate();
   //dispatch
@@ -29,20 +29,19 @@ const Signin = () => {
   let { loading, error, isAuth, token } = useSelector(
     (store) => store.authManager
   );
-  console.log(isAuth, token);
-  let load = false;
+  
+
 
   let handleSignin = () => {
-    if(!email || !password)
-    {
+    if (!email || !password) {
       toast({
         title: `Email and password required`,
         status: "error",
         isClosable: true,
-      })
+      });
       return;
     }
-    console.log(email, password);
+    
     let data = { email, password };
     dispatch(loginfun(data));
   };
@@ -51,7 +50,7 @@ const Signin = () => {
       title: `Login successfull`,
       status: "success",
       isClosable: true,
-    })
+    });
     navigate("/");
   }
   return (
@@ -111,7 +110,7 @@ const Signin = () => {
                 </FormControl>
 
                 <Stack spacing={10} pt={2}>
-                  {load ? (
+                  {loading ? (
                     <Button isLoading colorScheme="green" variant="solid">
                       Email
                     </Button>
@@ -133,7 +132,7 @@ const Signin = () => {
                 <Stack>
                   <Text align={"center"} fontSize={"sm"}>
                     New user?{" "}
-                    <Link color={"green"} to="/signin">
+                    <Link color={"green"} href="/signup">
                       Sign-up
                     </Link>
                   </Text>

@@ -1,9 +1,8 @@
-let mongoose=require("mongoose");
-let dotenv=require("dotenv");
+let mongoose = require("mongoose");
+let dotenv = require("dotenv");
 
-dotenv.config();
+dotenv.config(); //Load environment variables
 
+let connectDB = mongoose.connect(process.env.MONGOURL); //connect to the database
 
-let connectDB=mongoose.connect(process.env.MONGOURL);
-
-module.exports=connectDB;
+module.exports = connectDB;

@@ -7,7 +7,6 @@ import PrivateRoute from "./PrivateRoute";
 
 import SingleCarPage from "../pages/SingleCarPage";
 
-
 import AddDetails from "../pages/Inventory_Related";
 const AllRoutes = () => {
   return (

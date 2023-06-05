@@ -1,7 +1,6 @@
 let mongoose = require("mongoose");
 
-//this is the inventory model Schema which states that all the keys of inventory document will not more than
-//thsese given keys and of specific types mentioned also
+//this is the inventory model Schema which means  all the keys of inventory document will not more than
 
 let marketPlaceTnventoryModel = new mongoose.Schema({
   user: {

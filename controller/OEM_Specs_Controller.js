@@ -14,13 +14,13 @@ let OEM_SpecsGetController = async (req, res) => {
   }
 };
 
-let Get_OEM_SpaceController =  async (req, res) => {
+let Get_OEM_SpaceController = async (req, res) => {
   const { search } = req.query;
-  console.log(req.query);
+
   try {
     if (search) {
       //this query will find the documents which will match the patiucular regex query by options i for
-      //case senstive searching like Hanumat HANUMAT both will give results same
+      //case senstive searching
       // if search queyr matches with any of the nameofModel yearModel and colors it weill return data
       let specs = await OEM_SpecsModel.find({
         $or: [
@@ -38,6 +38,5 @@ let Get_OEM_SpaceController =  async (req, res) => {
     res.send({ error });
   }
 };
-
 
 module.exports = { OEM_SpecsGetController, Get_OEM_SpaceController };

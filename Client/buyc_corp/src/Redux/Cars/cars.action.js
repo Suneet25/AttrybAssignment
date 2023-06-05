@@ -22,7 +22,7 @@ export let getCars = (filter,order) => async (dispatch) => {
   dispatch({ type: GET_CARS_LOADING });
   try {
     let res = await axios.get(
-      `http://localhost:8000/api/marketPlace_Inventory/get-inventoryInfo?filter=${filter}&order=${order}`
+      `https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/get-inventoryInfo?filter=${filter}&order=${order}`
     );
 console.log(res.data.flteredData);
     dispatch({ type: GET_CARS_SUCCESS, payload: res.data.flteredData });

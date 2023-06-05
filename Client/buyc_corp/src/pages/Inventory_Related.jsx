@@ -11,12 +11,11 @@ import {
   Stack,
   Text,
   Textarea,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-
 
 const AddDetails = () => {
   const [image, setImage] = useState("");
@@ -31,14 +30,11 @@ const AddDetails = () => {
   const [registrationPlace, setRegistrationPlace] = useState("");
   const [search, setSearch] = useState([]);
   const [inputData, setInputData] = useState("");
-  let toast=useToast();
+  let toast = useToast();
   let elem = useRef(null);
- 
-let {token}=useSelector(store=>store.authManager);
-console.log(token.token);
-let handleFocus=()=>{
-  elem.current.focus()
-}
+
+  let { token } = useSelector((store) => store.authManager);
+  console.log(token);
 
   let handleSearch = async () => {
     let res = await axios.get(
@@ -46,65 +42,68 @@ let handleFocus=()=>{
     );
     setSearch(res.data.specs);
   };
-let handleSetOEMId=(id,el)=>{
-  setOemSpecs(id);
-  
-}
+  let handleSetOEMId = (id, el) => {
+    setOemSpecs(id);
+  };
 
-
-const handleAddCar =async () => {
-  //  car addition logic here
-  console.log(
-    "Add Car:",
-    oemSpecs,
-    image,
-    title,
-    description,
-    kmOnOdometer,
-    majorScratches,
-    originalPaint,
-    accidentsReported,
-    previousBuyers,
-    registrationPlace
-  );
-
-
-  await axios.post(`https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/add-inventoryInfo`, {
-    oemSpecs,
-    image,
-    title,
-    description,
-    kmOnOdometer,
-    majorScratches,
-    originalPaint,
-    accidentsReported,
-    previousBuyers,
-    registrationPlace
-  }, {
-    headers: {
-      'Authorization':  token && token.token ? ` ${token.token}` : undefined
-    }
-  })
-    .then(response => {
-      // Handle the response
-      console.log(response.data);
-  
+  const handleAddCar = async () => {
+    //  car addition logic here
+    if (
+      !oemSpecs ||
+      !image ||
+      !title ||
+      !description ||
+      !kmOnOdometer ||
+      !majorScratches ||
+      !originalPaint ||
+      !accidentsReported ||
+      !previousBuyers ||
+      !registrationPlace
+    ) {
       toast({
-        title: `Car added successfully`,
-        status: "success",
+        title: `All fields are required`,
+        status: "info",
         isClosable: true,
+      });
+      return;
+    }
+
+    await axios
+      .post(
+        `https://drawers-armadillo.cyclic.app/api/marketPlace_Inventory/add-inventoryInfo`,
+        {
+          oemSpecs,
+          image,
+          title,
+          description,
+          kmOnOdometer,
+          majorScratches,
+          originalPaint,
+          accidentsReported,
+          previousBuyers,
+          registrationPlace,
+        },
+        {
+          headers: {
+            Authorization: ` ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        // Handle the response
+        console.log(response.data);
+
+        toast({
+          title: `Car added successfully`,
+          status: "success",
+          isClosable: true,
+        });
       })
-    })
-    .catch(error => {
-      // Handle the error
-      console.error(error);
-    });
-  
-
-
-
-};
-
+      .catch((error) => {
+        // Handle the error
+        console.error(error);
+      });
+  };
 
   return (
     <Box bg={"rgb(247,250,252)"}>
@@ -116,7 +115,7 @@ const handleAddCar =async () => {
         margin="auto"
       >
         <Input
-        ref={elem}
+          ref={elem}
           type="text"
           placeholder="Search for OEM-specs"
           border={"1px solid gray"}
@@ -145,7 +144,7 @@ const handleAddCar =async () => {
         boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
       >
         {search.map((el) => (
-          <Box key={el._id} onClick={()=>handleSetOEMId(el._id,el)}>
+          <Box key={el._id} onClick={() => handleSetOEMId(el._id, el)}>
             <Flex justifyContent={"center"} alignItems={"center"} gap={10}>
               <Image
                 src={el.image}
@@ -171,39 +170,32 @@ const handleAddCar =async () => {
         pb={5}
         borderRadius={5}
       >
+        <InputGroup margin="auto">
+          <Input
+            ref={elem}
+            border={"1px solid gray"}
+            type="text"
+            placeholder="Select OEM specs"
+            value={oemSpecs}
+            onChange={(e) => setOemSpecs(e.target.value)}
+          />
+          <InputRightElement width="4.5rem">
+            <Button
+              h="1.75rem"
+              size="sm"
+              onClick={()=>elem.current.focus()}
+              bgColor={"green.600"}
+              color={"white"}
+              _hover={{
+                color: "white",
+                bg: "green.700",
+              }}
+            >
+              <TriangleUpIcon  />
+            </Button>
+          </InputRightElement>
+        </InputGroup>
 
-
-<InputGroup
-       
-        margin="auto"
-      >
-        <Input
-        ref={elem}
-         
-          border={"1px solid gray"}
-          type="text"
-          placeholder="Select OEM specs"
-          value={oemSpecs}
-          onChange={(e) => setOemSpecs(e.target.value)}
-        />
-        <InputRightElement width="4.5rem">
-          <Button
-            h="1.75rem"
-            size="sm"
-            onClick={handleFocus}
-            bgColor={"green.600"}
-            color={"white"}
-            _hover={{
-              color: "white",
-              bg: "green.700",
-            }}
-          >
-            <TriangleUpIcon />
-          </Button>
-        </InputRightElement>
-      </InputGroup>
-        
-       
         <Input
           border={"1px solid gray"}
           type="text"

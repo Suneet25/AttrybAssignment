@@ -11,7 +11,7 @@ import {
   Image,
   Select,
   Text,
-  Heading
+  Heading,
 } from "@chakra-ui/react";
 import Loader from "../components/Loader";
 const SingleCarPage = () => {
@@ -100,6 +100,18 @@ const SingleCarPage = () => {
                     ))}
                   </Select>
                 </Text>
+                <Flex
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  direction={"column"}
+                >
+                  <Text as={"b"}>
+                    Oem Specs:-{singleCarData?.oemSpecs?.model}
+                  </Text>
+                  <Text as={"b"}>
+                    Mileage:-{singleCarData?.oemSpecs?.mileage}
+                  </Text>
+                </Flex>
                 <Box>
                   <Button
                     size={"sm"}
@@ -107,7 +119,7 @@ const SingleCarPage = () => {
                     color={"white"}
                     _hover={{ backgroundColor: "red.700", color: "white" }}
                   >
-                    Delete
+                    Dealer Name:-{singleCarData?.user?.name}
                   </Button>
                 </Box>
               </Flex>
